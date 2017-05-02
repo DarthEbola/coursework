@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  route_id: 
+  date_start: 2017-05-02 11:00:01
+  count_days: 1
+  add_pay: 1.5
+  add_description: MyText
+
+two:
+  route_id: 
+  date_start: 2017-05-02 11:00:01
+  count_days: 1
+  add_pay: 1.5
+  add_description: MyText

@@ -1,0 +1,27 @@
+%h1 Listing excursions
+
+%table
+  %thead
+    %tr
+      %th City
+      %th Name
+      %th Description
+      %th Price
+      %th
+      %th
+      %th
+
+  %tbody
+    - @excursions.each do |excursion|
+      %tr
+        %td= excursion.city.name
+        %td= excursion.name
+        %td= excursion.description
+        %td= excursion.price
+        %td= link_to 'Show', excursion
+        %td= link_to 'Edit', edit_excursion_path(excursion)
+        %td= link_to 'Destroy', excursion, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Excursion', new_excursion_path

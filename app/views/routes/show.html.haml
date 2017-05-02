@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @route.city.name
+%p
+  %b City:
+  = @route.city_id
+%p
+  %b Description:
+  = @route.description
+%p
+  %b Price:
+  = @route.price
+
+= link_to 'Edit', edit_route_path(@route)
+\|
+= link_to 'Back', routes_path

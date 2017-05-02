@@ -1,0 +1,27 @@
+%h1 Listing routes
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th City id
+      %th Description
+      %th Price
+      %th
+      %th
+      %th
+
+  %tbody
+    - @routes.each do |route|
+      %tr
+        %td= route.name
+        %td= route.city.name
+        %td= route.description
+        %td= route.price
+        %td= link_to 'Show', route
+        %td= link_to 'Edit', edit_route_path(route)
+        %td= link_to 'Destroy', route, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Route', new_route_path
