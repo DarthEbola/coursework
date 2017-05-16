@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20170502070709) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "excursions", force: :cascade do |t|
-    t.integer  "city_id"
+    t.integer  "city_id",     null: false
     t.string   "name",        null: false
     t.string   "description", null: false
     t.float    "price",       null: false
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20170502070709) do
 
   create_table "routes", force: :cascade do |t|
     t.string   "name",        null: false
-    t.integer  "city_id"
+    t.integer  "city_id",     null: false
     t.text     "description", null: false
     t.float    "price",       null: false
     t.datetime "created_at",  null: false
@@ -83,11 +83,11 @@ ActiveRecord::Schema.define(version: 20170502070709) do
   add_index "routes", ["city_id"], name: "index_routes_on_city_id", using: :btree
 
   create_table "tours", force: :cascade do |t|
-    t.integer  "route_id"
+    t.integer  "route_id",        null: false
     t.datetime "date_start",      null: false
-    t.integer  "count_days"
-    t.float    "add_pay"
-    t.text     "add_description"
+    t.integer  "count_days",      null: false
+    t.float    "add_pay",         null: false
+    t.text     "add_description", null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
