@@ -1,0 +1,4 @@
+.route-edit
+  = f.fields_for :route do |route|
+    = render "route_form", route: route
+  

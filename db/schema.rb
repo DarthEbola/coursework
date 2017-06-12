@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20170502070709) do
 
   create_table "tours", force: :cascade do |t|
     t.integer  "route_id",        null: false
-    t.datetime "date_start",      null: false
+    t.date     "date_start",      null: false
     t.integer  "count_days",      null: false
     t.float    "add_pay",         null: false
     t.text     "add_description", null: false

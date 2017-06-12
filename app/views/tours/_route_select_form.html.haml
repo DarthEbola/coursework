@@ -1,0 +1,14 @@
+.form-group.route-select
+  = f.label :route
+  = f.select(:route_id, options_for_select(Route.pluck('name, id'), f.object.route_id), {},{ class: 'form-control select-route', onchange: 'update_fields(this)'})
+.form-group.route-select
+  = f.fields_for(:route, include_id: false) do |route|
+    .form-group
+      = route.label :city
+      %i{class: 'upd-rcity'} #{route.object.city.name }
+    .form-group
+      = route.label :description
+      %i{class: 'upd-rdescription'} #{route.object.description }
+    .form-group
+      = route.label :price
+      %i{class: 'upd-rprice'} #{route.object.price }

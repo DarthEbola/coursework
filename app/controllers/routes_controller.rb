@@ -54,6 +54,7 @@ class RoutesController < ApplicationController
   # DELETE /routes/1
   # DELETE /routes/1.json
   def destroy
+    @route.city.destroy if (@route.city.routes.size ==1) && (@route.city.excursions.size == 0)
     @route.destroy
     respond_to do |format|
       format.html { redirect_to routes_url, notice: 'Route was successfully destroyed.' }
@@ -69,6 +70,8 @@ class RoutesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def route_params
-      params.require(:route).permit(:name, :city_id, :description, :price)
+      params.require(:route).permit(:name, :city_id, :description, :price,
+        city_attribites: [:name, :id, :_destroy]
+      )
     end
 end

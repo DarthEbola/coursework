@@ -1,21 +1,32 @@
-%p#notice= notice
+=breadcrumb_tag do
+  %li.active
+    = @tour.route.name + @tour.date_start.strftime(" (%d.%m.%Y)")
+  %li
+    = link_to t('headers.tours.index'), tours_path()
+  %li
+    Главная
 
-%p
-  %b Route:
-  = @tour.route.name
-%p
-  %b Date start:
-  = @tour.date_start
-%p
-  %b Count days:
-  = @tour.count_days
-%p
-  %b Add pay:
-  = @tour.add_pay
-%p
-  %b Add description:
-  = @tour.add_description
+.page-header
+  %h1= @tour.route.name + @tour.date_start.strftime(" (%d.%m.%Y)")
+.row 
+  .col-md-12
+    %b= Tour.human_attribute_name(:route)
+    %p= @tour.route.name
+    
+    %b= Tour.human_attribute_name(:date_start)
+    %p= @tour.date_start.strftime("%d.%m.%Y")
+    
+    %b= Tour.human_attribute_name(:count_days)
+    %p= @tour.count_days
 
-= link_to 'Edit', edit_tour_path(@tour)
-\|
-= link_to 'Back', tours_path
+    %b= Tour.human_attribute_name(:add_pay)
+    %p= @tour.add_pay
+
+    %b= Tour.human_attribute_name(:add_description)
+    %p= @tour.add_description
+
+= link_to edit_tour_path(@tour), class: 'btn btn-info' do
+  = fa_icon :edit
+  = t('buttons.edit')
+= link_to t('buttons.back'), tours_path, class: 'btn btn-default'
+

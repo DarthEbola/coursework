@@ -1,5 +1,14 @@
-%h1 New excursion
+=breadcrumb_tag do
+  %li.active
+    = t('headers.excursions.new')
+  %li
+    = link_to t('headers.excursions.index'), excursions_path()
+  %li
+    Главная
+
+.page-header
+  %h1= t('headers.excursions.new')
 
 = render 'form'
 
-= link_to 'Back', excursions_path
+= link_to t('buttons.back'), excursions_path, class: 'btn btn-default'

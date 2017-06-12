@@ -13,12 +13,17 @@ ru:
     edit: Редактировать
     destroy: Удалить
     show: Показать
+    back: Назад
     confirm:
       user: Действительно удалить пользователя?
       role: Действительно удалить роль?
+      excursion: Действительно удалить экскурсию?
+      tour: Действительно удалить тур?
     new: 
       user: Новый пользователь
       role: Новая роль
+      excursion: Новая экскурсия
+      tour: Новый тур
   headers:
     users:
       edit: Редактирование пользователя
@@ -28,6 +33,23 @@ ru:
       index: Список возможных ролей пользователей
       edit: Редактирование роли
       new: Новая роль
+
+    cities:
+      index: Список городов
+      edit: Редактирование города
+      new: Новый город
+    excursions:
+      index: Список экскурсий
+      edit: Редактирование экскурсии
+      new: Новая экскурсия
+    routes:
+      index: Список маршрутов
+      edit: Редактирование маршрута
+      new: Новый маршрут
+    tours:
+      index: Список туров
+      edit: Редактирование тура
+      new: Новый тур
   views:
     pagination:
       first: ⇤
@@ -53,4 +75,23 @@ ru:
         name: Обозначение
         info: Краткое название
         full_info: Описание
+
+      city:
+        name: Город
+      excursion:
+        city: Город
+        name: Название
+        description: Описание
+        price: Цена
+      route:
+        city: Город
+        name: Название
+        description: Описание
+        price: Базовая цена
+      tour:
+        route: Маршрут
+        date_start: Дата отъезда
+        count_days: Кол-во дней тура
+        add_pay: Доп. взносы
+        add_description: Доп.описание
           

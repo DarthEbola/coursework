@@ -1,0 +1,91 @@
+
+=breadcrumb_tag do
+  %li.active
+    Поиск
+  %li
+    = link_to t('headers.tours.index'), tours_path()
+  %li
+    Главная
+.page-header
+  %h1 Поиск
+
+= form_tag search_tours_path(), method: :get do
+  .row
+    .col-md-6
+      .form-group
+        %b= Tour.human_attribute_name(:route)
+        = text_field_tag 'search[route]', params['search']['route'], class: 'form-control'
+    .col-md-6
+      .form-group
+        %b= Route.human_attribute_name(:city)
+        = text_field_tag 'search[city]', params['search']['city'], class: 'form-control'
+  .row
+    .col-md-6
+      .form-group
+        %b= Tour.human_attribute_name(:date_start)
+        .input-group.date.datepicker
+          = text_field_tag 'search[date_start]', params['search']['date_start'], class: 'form-control'
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+    .col-md-6
+      .form-group
+        %b= Tour.human_attribute_name(:count_days)
+        = number_field_tag 'search[count_days]', params['search']['count_days'], class: 'form-control'
+  .row
+    .col-md-12
+      .form-group
+        %b= Route.human_attribute_name(:description)
+        = text_field_tag 'search[description]', params['search']['description'], class: 'form-control'
+  .row
+    .col-md-12
+      .form-group
+        %b= Tour.human_attribute_name(:add_description)
+        = text_field_tag 'search[add_description]', params['search']['add_description'], class: 'form-control'
+  .row
+    .col-md-6
+      .form-group
+        %b= Route.human_attribute_name(:price)
+        = number_field_tag 'search[price]', params['search']['price'], step: 0.01,  class: 'form-control'
+
+    .col-md-6
+      .form-group
+        %b= Tour.human_attribute_name(:add_pay)
+        = number_field_tag 'search[add_pay]', params['search']['add_pay'], step: 0.01, class: 'form-control'
+
+
+
+  = submit_tag 'Поиск', class: 'btn btn-primary'
+%br
+- if !@tours.empty?
+  %table.table.table-hover.table-striped.table-adaptive
+    %thead
+      %tr
+        %th= Tour.human_attribute_name(:route)
+        %th= Route.human_attribute_name(:city)
+        %th= Tour.human_attribute_name(:date_start)
+        %th= Tour.human_attribute_name(:count_days)
+        %th= Route.human_attribute_name(:description)
+        %th= Tour.human_attribute_name(:add_description)
+        %th= Route.human_attribute_name(:price)
+        %th= Tour.human_attribute_name(:add_pay)
+    %tbody
+      - @tours.each do |tour|
+        %tr.well
+          %td{:data => {:label => "#{Tour.human_attribute_name(:route)}"}}
+            = tour.route.name
+          %td{:data => {:label => "#{Route.human_attribute_name(:city)}"}}
+            = tour.route.city.name
+          %td{:data => {:label => "#{Tour.human_attribute_name(:date_start)}"}}
+            = tour.date_start.strftime('%d.%m.%Y')
+          %td{:data => {:label => "#{Tour.human_attribute_name(:count_days)}"}}
+            = tour.count_days
+          %td{:data => {:label => "#{Route.human_attribute_name(:description)}"}}
+            = tour.route.description
+          %td{:data => {:label => "#{Tour.human_attribute_name(:add_description)}"}}
+            = tour.add_description
+          %td{:data => {:label => "#{Route.human_attribute_name(:price)}"}}
+            = tour.route.price
+          %td{:data => {:label => "#{Tour.human_attribute_name(:add_pay)}"}}
+            = tour.add_pay
+- else
+  %h3 Ничего не найдено

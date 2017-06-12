@@ -1,0 +1,3 @@
+.route-new
+  = f.fields_for :route, Route.new do |route|
+    = render "route_form", route: route

@@ -6,20 +6,47 @@
         - @tour.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :route_id
-    = f.text_field :route_id
-  .field
-    = f.label :date_start
-    = f.datetime_select :date_start
-  .field
-    = f.label :count_days
-    = f.number_field :count_days
-  .field
-    = f.label :add_pay
-    = f.text_field :add_pay
-  .field
-    = f.label :add_description
-    = f.text_area :add_description
-  .actions
-    = f.submit 'Save'
+  .row
+    .col-md-4
+      .form-group
+        = f.label :date_start
+        .input-group.date.datepicker
+          = f.text_field(:date_start, value: (f.object.date_start.strftime('%d.%m.%Y') if !f.object.new_record?), class: 'form-control')
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+    .col-md-4
+      .form-group
+        = f.label :count_days
+        = f.number_field :count_days, class: 'form-control'
+    .col-md-4
+      .form-group
+        = f.label :add_pay
+        = f.number_field :add_pay, class: 'form-control'
+  .row
+    .col-md-12
+      .form-group
+        = f.label :add_description
+        = f.text_field :add_description, class: 'form-control'
+  .row
+    .col-md-12
+      %h3 Выберите маршрут
+      %span.toright
+        = link_to_new_route()
+        = link_to_edit_route()
+      = render('route_select_form', f: f)
+      %div{class: "edit_form", "data-content" => "#{render "route_edit_form", f: f}"}
+      %div{class: "new_form", "data-content" => "#{render "route_new_form", f: f}"}
+      %div{class: "select_form", "data-content" => "#{render "route_select_form", f: f}"}
+
+
+  .form-actions.bottom20
+    = f.submit nil, class: 'btn btn-primary'
+
+.for_update_fields
+  - if @routes
+    - @routes.each do |route|
+      %div{class: "name-#{route.id}", data: {content: "#{route.name}"}  }
+      %div{class: "description-#{route.id}", data: {content: "#{route.description}"}  }
+      %div{class: "price-#{route.id}", data: {content: "#{route.price}"}  }
+      %div{class: "city_id-#{route.id}", data: {content: "#{route.city_id}"}  }
+      %div{class: "city_name-#{route.id}", data: {content: "#{route.city.name}"}  }

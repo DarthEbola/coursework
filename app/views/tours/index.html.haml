@@ -1,29 +1,43 @@
-%h1 Listing tours
+=breadcrumb_tag do
+  %li.active
+    = t('headers.tours.index')
+  %li
+    Главная
 
-%table
+.page-header
+  %h1= t('headers.tours.index')
+
+%table.table.table-hover.table-striped
+  %caption
+    = link_to new_tour_path, class: 'btn btn-success' do
+      = fa_icon :plus
+      = t('buttons.new.tour') 
   %thead
     %tr
-      %th Route
-      %th Date start
-      %th Count days
-      %th Add pay
-      %th Add description
-      %th
-      %th
+      %th= Tour.human_attribute_name(:route)
+      %th= Tour.human_attribute_name(:date_start)
+      %th= Tour.human_attribute_name(:count_days)
+      %th= Tour.human_attribute_name(:add_pay)
+      %th= Tour.human_attribute_name(:add_description)
       %th
 
   %tbody
     - @tours.each do |tour|
       %tr
-        %td= tour.route.name
-        %td= tour.date_start
-        %td= tour.count_days
-        %td= tour.add_pay
-        %td= tour.add_description
-        %td= link_to 'Show', tour
-        %td= link_to 'Edit', edit_tour_path(tour)
-        %td= link_to 'Destroy', tour, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Tour', new_tour_path
+        %td.center= tour.route.name
+        %td.center= tour.date_start.strftime("%d.%m.%Y")
+        %td.center= tour.count_days
+        %td.center= tour.add_pay
+        %td.center= tour.add_description
+        %td.right
+          = link_to tour, class: 'btn btn-warning' do
+            = fa_icon :eye
+            = t('buttons.show')
+          = link_to edit_tour_path(tour), class: 'btn btn-info' do
+            = fa_icon :edit
+            = t('buttons.edit')
+          = link_to tour, :method => :delete, 
+          :data => { :confirm => t('buttons.confirm.tour') }, 
+          class: 'btn btn-danger' do
+            = fa_icon :times
+            = t('buttons.destroy')

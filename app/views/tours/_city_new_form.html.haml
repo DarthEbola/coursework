@@ -1,0 +1,5 @@
+.form-group.city-new.city-edit
+  = route.fields_for :city, City.new do |city|
+    = city.hidden_field(:id)
+    = city.label :name
+    = city.text_field :name, class: 'form-control'

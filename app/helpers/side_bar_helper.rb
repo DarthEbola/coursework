@@ -1,11 +1,38 @@
 module SideBarHelper
   def side_bar_items(ru)
     result = []
+    if @current_user.blank?
+      result << {
+        :name => 'Войти',
+        :icon => 'sign-in',
+        :controller => :welcome, 
+        :action => :new
+      }
+    else
+      result << {
+        :name => @current_user.email,
+        :icon => 'sign-out',
+        :controller => :welcome, 
+        :action => :destroy
+      }
+    end
     result << {
-      :name => 'Сслыка без детей',
-      :icon => 'list',
-      :controller => :welcome, 
+      :name => 'Экскурсии',
+      :icon => 'map-marker',
+      :controller => :excursions, 
       :action => :index
+    }
+    result << {
+      :name => 'Туры',
+      :icon => 'road',
+      :controller => :tours, 
+      :action => :index
+    }
+    result << {
+      :name => 'Поиск туров',
+      :icon => 'search',
+      :controller => :tours, 
+      :action => :search
     }
     result << {
       :name => 'Администрирование',

@@ -1,5 +1,6 @@
 class ExcursionsController < ApplicationController
   before_action :set_excursion, only: [:show, :edit, :update, :destroy]
+  skip_before_action :check_app_auth, only: [:index, :show]
 
   # GET /excursions
   # GET /excursions.json
@@ -54,6 +55,7 @@ class ExcursionsController < ApplicationController
   # DELETE /excursions/1
   # DELETE /excursions/1.json
   def destroy
+    @excursion.city.destroy if (@excursion.city.excursions.size == 1) && (@excursion.city.routes.size == 0)
     @excursion.destroy
     respond_to do |format|
       format.html { redirect_to excursions_url, notice: 'Excursion was successfully destroyed.' }

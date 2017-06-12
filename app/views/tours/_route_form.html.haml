@@ -1,0 +1,20 @@
+= route.hidden_field(:id, class: "route_id")
+.form-group
+  = route.label :name
+  = route.text_field :name, class: 'form-control route_name'
+%span.toright
+  = link_to_edit_city()
+  = link_to_new_city()
+= render("city_select_form", route: route)
+%div{class: "new_form_city", "data-content"=>"#{render "city_new_form", route: route}"}
+%div{class: "edit_form_city", "data-content"=>"#{render "city_edit_form", route: route}"}
+%div{class: "select_form_city", "data-content"=>"#{render "city_select_form", route: route}"}
+
+
+.form-group
+  = route.label :description
+  = route.text_field :description, class: 'form-control route_description'
+.form-group
+  = route.label :price
+  = route.number_field :price, step: 0.01, class: 'form-control route_price'
+

@@ -1,5 +1,7 @@
 class ToursController < ApplicationController
   before_action :set_tour, only: [:show, :edit, :update, :destroy]
+  before_action :get_routes, only: [:edit, :update]
+  skip_before_action :check_app_auth, only: [:index, :show]
 
   # GET /tours
   # GET /tours.json
@@ -10,6 +12,15 @@ class ToursController < ApplicationController
   # GET /tours/1
   # GET /tours/1.json
   def show
+  end
+
+  def search
+    if params.has_key?('search')
+      @tours = Tour.search(params['search'])
+    else
+      @tours = []
+    end
+    params['search'] ||= {}
   end
 
   # GET /tours/new
@@ -54,6 +65,10 @@ class ToursController < ApplicationController
   # DELETE /tours/1
   # DELETE /tours/1.json
   def destroy
+    if @tour.route.tours.size == 1
+      @tour.route.city.destroy if (@tour.route.city.routes.size ==1) && (@tour.route.city.excursions.size == 0)
+      @tour.route.destroy 
+    end
     @tour.destroy
     respond_to do |format|
       format.html { redirect_to tours_url, notice: 'Tour was successfully destroyed.' }
@@ -69,6 +84,13 @@ class ToursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tour_params
-      params.require(:tour).permit(:route_id, :date_start, :count_days, :add_pay, :add_description)
+      params.require(:tour).permit(:route_id, :date_start, :count_days, :add_pay, :add_description,
+        route_attributes: [:name, :city_id, :description, :price, :id, :_destroy,
+          city_attributes: [:name, :id, :_destroy]]
+      )
+    end
+
+    def get_routes
+      @routes = Route.all
     end
 end

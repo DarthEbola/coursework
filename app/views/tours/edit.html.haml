@@ -1,7 +1,16 @@
-%h1 Editing tour
+=breadcrumb_tag do
+  %li.active
+    = t('headers.tours.edit')
+  %li
+    = link_to @tour.route.name + @tour.date_start.strftime(" (%d.%m.%Y)"), @tour
+  %li
+    = link_to t('headers.tours.index'), tours_path()
+  %li
+    Главная
+
+.page-header
+  %h1= t('headers.tours.edit')
+  %h3= @tour.route.name + @tour.date_start.strftime(" (%d.%m.%Y)")
 
 = render 'form'
 
-= link_to 'Show', @tour
-\|
-= link_to 'Back', tours_path
