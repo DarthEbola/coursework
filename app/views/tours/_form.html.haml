@@ -32,7 +32,8 @@
       %h3 Выберите маршрут
       %span.toright
         = link_to_new_route()
-        = link_to_edit_route()
+        - if !f.object.new_record?
+          = link_to_edit_route()
       = render('route_select_form', f: f)
       %div{class: "edit_form", "data-content" => "#{render "route_edit_form", f: f}"}
       %div{class: "new_form", "data-content" => "#{render "route_new_form", f: f}"}

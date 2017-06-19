@@ -35,6 +35,12 @@ module SideBarHelper
       :action => :search
     }
     result << {
+      :name => 'Сслыка без детей',
+      :icon => 'list',
+      :controller => :welcome, 
+      :action => :index
+    }
+    result << {
       :name => 'Администрирование',
       :icon => 'users',
       :children => [
